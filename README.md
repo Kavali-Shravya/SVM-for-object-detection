@@ -5,11 +5,13 @@ To detect human hands in images using SVM
 
 The training data is typically a set of images with bounding boxes of the hands. Positive training examples are image patches extracted at the annotated locations. A negative training example can be any image patch that does not significantly overlap with the annotated hands. Thus there potentially many more negative training examples than positive training examples. Due to memory limitation, it will not be possible to use all negative training examples at the same time. To handle this, I have implemented hard-negative mining to find hardest negative examples and iteratively train an SVM.
 
-**Data:** Downloaded the ContactHands dataset from http://vision.cs.stonybrook.edu/ ̃supreeth/ContactHands_data_website/
+**Data:** Downloaded the ContactHands dataset from http://vision.cs.stonybrook.edu/ ̃supreeth/ContactHands_data_website/.
+
 **Reference:** ‘Detecting Hands and Recognizing Physical Contact in the Wild.’ S. Narasimhaswamy, T. Nguyen, M. Hoai. Advances in Neural Information Processing Systems (NeurIPS), 2020.
 
-**Hard negative mining algorithm **
+**Hard negative mining algorithm**
 
+```
 PosD ← all annotated hands
 NegD ← random image patches
 (w, b) ← trainSVM(P osD, N egD)
@@ -19,3 +21,4 @@ for iter = 1,2,··· do
     NegD ← (NegD \ A) ∪ B.
     (w, b) ← trainSVM(P osD, N egD)
  end for
+```
